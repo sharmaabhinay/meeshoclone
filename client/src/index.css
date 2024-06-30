@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.hero2bg{
+  background-image: url('https://images.meesho.com/images/marketing/1704720332049_1200.webp');
+}
+.hero3bg{
+  background-image: url('https://images.meesho.com/images/marketing/1704720392370_1200.webp');
+}
+.hero4bg{
+  background-image: url('https://images.meesho.com/images/pow/downloadBannerDesktop_1050.webp');
+}
+.meeshosupplier{
+  background-image: url('https://images.meesho.com/images/pow/supplyBannerDesktop_1106.webp');
+}
+.loginPageBackground{
+  background-image: linear-gradient(rgb(253, 233, 242) 0%, rgb(253, 240, 232) 100%, rgb(253, 240, 232) 100%);;
+}
+.signupbg{
+  border-radius: 8px;
+  /* border-top-left-radius: 1r; */
+}
+.dashed{
+  border-bottom: 1px solid grey;
+  border-style:dotted;
+}
+/* .loadercss{
+  height: 2rem;
+  width: 2rem;
+  border: 2px solid grey;
+} */
