@@ -3,7 +3,7 @@ import React from 'react';
 const Hero = () => {
   return (
     <>
-    <div className='relative w-full md:block z-0 sm:pt-20 md:pt-36'> {/* Added pt-24 for padding-top */}
+    <div className='border-2 border-green-500 relative sm:-mb-20 w-full md:block z-0 sm:pt-20 md:pt-36'> {/* Added pt-24 for padding-top */}
         <div className='sm:hidden md:flex md:w-[82%] m-auto justify-center md:py-10'>
             <div className='bg-slate-100 p-10'>
                 <div className=''>
@@ -39,7 +39,7 @@ const Hero = () => {
                 <div className='text-4xl font-semibold'>Top Categories to choose from</div>
                 <div className='h-px w-[25%] bg-red-500'></div>
             </div>
-            <div className='hero2bg bg-cover h-auto sm:w-full md:w-[68rem] bg-no-repeat md:my-8 p-5 md:pt-20 flex items-end justify-between gap-2'>
+            <div className='hero2bg bg-cover  h-auto sm:w-full md:w-[68rem] bg-no-repeat md:my-8 p-5 md:pt-20 flex items-end justify-between gap-2'>
                 <div><img src="https://images.meesho.com/images/marketing/1701835320853_400.webp" alt="" className='sm:w-[100px] md:w-auto'/></div>
                 <div className='flex justify-between gap-5'>
                     <img src="https://images.meesho.com/images/marketing/1692191045019_300.webp" alt="" className='md:h-66 sm:w-[80px] md:w-64'/>

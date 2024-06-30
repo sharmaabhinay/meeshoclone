@@ -19,7 +19,7 @@ const Products = () => {
   const searchQuery = location.state?.query;
   useEffect(()=> {
     // dispatch(searchProduct(searchQuery))
-    window.scroll(0,0)
+    // window.scroll(0,0)
     document.title = "Meesho"
   })
   const genderFilter = (e)=> {

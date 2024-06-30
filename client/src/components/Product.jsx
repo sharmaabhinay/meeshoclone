@@ -33,9 +33,9 @@ const Product = ({category}) => {
         <div className='flex flex-wrap justify-between sm:gap-0 md:gap-6'>
           {
               products.map((item,i)=> (
-                <Link to={`/singleproduct/${item._id}`} key={i} className='border-2 text-[#353543] md:rounded-lg md:h-[25rem] flex flex-col md:gap-2 sm:w-[50%] md:w-56 overflow-hidden pt-px p-2' onClick={()=> setId(item._id)}>
+                <Link to={`/singleproduct/${item._id}`} key={i} className='border-2 text-[#353543] d:rounded-lg md:h-[25rem] flex flex-col md:gap-2 sm:w-[50%] md:w-56 overflow-hidden pt-px p-2' onClick={()=> setId(item._id)}>
                     <img src={item.image1} alt="" className='md:h-60 sm:h-36'/>
-                    <p className='font-medium text-[#8b8ba3] overflow-hidden sm:text-xs md:text-base h-6'>{item.name}</p>
+                    <p className='font-medium text-[#8b8ba3] overflow-hidden sm:text-xs md:text-base h-[16px]'>{item.name}</p>
                     <div className='flex items-end gap-2'><p className='md:text-2xl font-bold sm:text-sm'>{item.price}</p><small className='font-semibold text-[#8b8ba3] text-xs'>onwards</small></div>
                     <div><span className='md:text-sm sm:text-[0.4rem] font-semibold text-[#8b8ba3] mb-2 bg-slate-100 px-2 rounded-xl md:w-26'>Free Delivery</span></div>
                     
