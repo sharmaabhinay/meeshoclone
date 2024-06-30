@@ -21,7 +21,7 @@ const Products = () => {
     // dispatch(searchProduct(searchQuery))
     // window.scroll(0,0)
     document.title = "Meesho"
-  })
+  },[])
   const genderFilter = (e)=> {
     dispatch(searchProduct(e))
   }
@@ -64,7 +64,7 @@ const Products = () => {
               </div>
               <hr  className='my-3'/>
               <div className='border sm:rounded-none md:rounded-lg sm:block md:hidden py-1 px-3'>
-              Sort : 
+                Sort : 
               </div>
               <div className="Category sm:border md:border-none sm:p-1 sm:px-[11px] md:p-0">
                 <div className='md:text-lg gap-1 sm:text-sm flex items-center sm:py-1 md:p-0 justify-between font-medium text-[#353543] md:mb-2'  onClick={handleCategory}><p>Category</p>{subcategory ? <i className="fa-solid fa-angle-up"></i> : <i className="fa-solid fa-angle-down"></i>}</div>

@@ -33,7 +33,7 @@ const Navbar = () => {
     const [webtitle,setWebtitle] = useState('Online Shopping Site for Fashion, Electronics, Home &amp; More | Meesho')
     
     useEffect(()=> {
-        // window.scroll(0,0)
+        window.scroll(0,0)
         const newfun = async ()=> {
             let testingUser = {
               phone:userPhoneNumber
