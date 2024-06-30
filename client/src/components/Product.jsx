@@ -29,7 +29,12 @@ const Product = ({category}) => {
   return (
     <>
     {
-      products.length == 0 ? (<div>loading</div>):(
+      products.length == 0 ? (<div className='w-full sm:my-32'>
+        <div className='w-20 m-auto text-center'>
+          <img src="https://th.bing.com/th/id/OIP.KkX2_mLnZjvUCUkjNQ_96AHaGW?rs=1&pid=ImgDetMain" alt="" className='sm:w-11 rounded-lg brightness-75' style={{opacity:0.4}}/>
+          <p className='font-bold text-gray-500 -translate-x-3'>Loading...</p>
+        </div>
+      </div>):(
         <div className='flex flex-wrap justify-between sm:gap-0 md:gap-6'>
           {
               products.map((item,i)=> (
