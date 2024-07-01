@@ -156,9 +156,9 @@ const Navbar = () => {
             </div>
             
         </div>
-        <form action='' onSubmit={handleonSearch} className='w-auto sm:w-68 sm:block md:hidden'>
+        <form action='' onSubmit={handleonSearch} className='w-auto sm:w-68 sm:block border-0 md:hidden'>
                  <i className="fa-solid fa-magnifying-glass absolute sm:text-sm md:text-xl text-slate-400 mt-2 ms-3"></i> {/* Changed class to className */}
-                <input type="text" placeholder='Try Saree, Kurti or Search by Product Code' onChange={(e)=> setQuery(e.target.value)} className='border-2 rounded sm:text-sm md:text-md outline-none sm:py-1 md:py-2 px-5 sm:ps-8 md:ps-12 sm:w-full md:w-[26rem]'/>
+                <input type="text" placeholder='Try Saree, Kurti or Search by Product Code' onChange={(e)=> setQuery(e.target.value)} className='border-2 rounded sm:text-sm md:text-md outline-none border-b-0 font-medium sm:py-1 md:py-2 px-5 sm:ps-8 md:ps-12 sm:w-full md:w-[26rem]'/>
             </form>
         <div className='w-full h-px bg-slate-400 mb-1'></div>
         <div className="submenuT sm:hidden md:block">

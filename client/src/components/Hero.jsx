@@ -3,7 +3,7 @@ import React from 'react';
 const Hero = () => {
   return (
     <>
-    <div className='border-2 border-green-500 relative sm:-mb-20 w-full md:block z-0 sm:pt-20 md:pt-36'> {/* Added pt-24 for padding-top */}
+    <div className='relative sm:-mb-20 w-full md:block z-0 sm:pt-20 md:pt-36'> {/* Added pt-24 for padding-top */}
         <div className='sm:hidden md:flex md:w-[82%] m-auto justify-center md:py-10'>
             <div className='bg-slate-100 p-10'>
                 <div className=''>

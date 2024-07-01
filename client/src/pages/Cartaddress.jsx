@@ -73,9 +73,9 @@ const Cartaddress = () => {
                 <div className='flex items-center md:w-[94%]'>
                   <span className='border-2 sm:text-xs md:text-sm sm:px-[3px] md:px-[.3rem] border-blue-600 bg-blue-600 rounded-full'><i className='fa-solid fa-check sm:text-xs text-white bg-blue-600'></i></span>
                   <div className='h-px bg-[#cecede] sm:w-10 md:w-48'></div>
-                  <span className='border-2  sm:text-xs md:text-sm px-[.4rem] border-[#cecede] text-[#cecede] rounded-full'>2</span>
+                  <span className='border-2  sm:text-xs md:text-sm sm:px-[.3rem] border-[#cecede] text-[#cecede] rounded-full'>2</span>
                   <div className='h-px bg-[#cecede] sm:w-10 md:w-48'></div>
-                  <span className='border-2  sm:text-xs md:text-sm px-[.4rem] border-[#cecede] text-[#cecede] rounded-full'>3</span>
+                  <span className='border-2  sm:text-xs md:text-sm sm:px-[.3rem] border-[#cecede] text-[#cecede] rounded-full'>3</span>
                   {/* <div className='h-px bg-[#353543]'></div> */}
                 </div>
                 <div className='flex sm:text-xs md:text-base justify-between text-sm font-semibold'>
@@ -92,7 +92,7 @@ const Cartaddress = () => {
     <div className='md:w-[72%] sm:pt-20 md:pt-28 m-auto'>
       {/* <hr /> */}
       <div className='flex sm:p-3 justify-between relative sm:flex-col md:flex-row gap-10'>
-        <div className='sm:hidden md:w-[60%] flex flex-col gap-4'>
+        {/* <div className='md:w-[60%] flex flex-col gap-4'>
           <h1 className='text-lg font-medium'>Add Delivery Address</h1>
           <div className='flex flex-col sm:gap-4 sm:text-sm md:text-lg md:gap-7'>
             <div className='flex flex-col gap-5 text-lg'>
@@ -113,13 +113,14 @@ const Cartaddress = () => {
             </div>
           </div>
          
-        </div>
+        </div> */}
+        
+        <div className='border-s-2 text-[#353543] p-5 md:px-12 md:fixed right-48  flex flex-col sm:gap-3 md:gap-5'>
         <div className='flex flex-col gap-2'>
-          <div className='flex justify-between bg-gray-100 font-medium p-3' onClick={()=> setPayment('cod')}><label htmlFor="cod">COD Cash on Delivery</label><input type="radio" name='payment-mode' id='cod' checked/></div>
-          <div className='flex justify-between bg-gray-100 font-medium p-3' onClick={()=> setPayment('onlnie')}><label htmlFor="online">pay online</label><input type="radio" name='payment-mode' id='online'/></div>
+          <div className='flex justify-between bg-gray-100 font-medium p-3' ><label htmlFor="cod" onClick={()=> setPayment('cod')}>COD Cash on Delivery</label><input type="radio" name='payment-mode' id='cod' className=''/></div>
+          <div className='flex justify-between bg-gray-100 font-medium p-3' ><label htmlFor="online" onClick={()=> setPayment('onlnie')}>pay online</label><input type="radio" name='payment-mode' id='online' checked/></div>
           <div></div>
         </div>
-        <div className='border-s-2 text-[#353543] p-5 md:px-12 md:fixed right-48  flex flex-col sm:gap-3 md:gap-5'>
           <h1 className='text-lg'>Price Details {myCartItems.length} items</h1>
           <div className='text-[#616163] flex justify-between'><p className='dashed'>Total Product Price</p><span>+₹{amount}</span></div>
           <hr />
