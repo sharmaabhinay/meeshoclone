@@ -61,6 +61,8 @@ const Cartaddress = () => {
     setAddress({...address,[e.target.name]:e.target.value})
 
   }
+  let dataa="hello world"
+  console.log(dataa)
 
 
   return (
@@ -117,8 +119,8 @@ const Cartaddress = () => {
         
         <div className='border-s-2 text-[#353543] p-5 md:px-12 md:fixed right-48  flex flex-col sm:gap-3 md:gap-5'>
         <div className='flex flex-col gap-2'>
-          <div className='flex justify-between bg-gray-100 font-medium p-3' ><label htmlFor="cod" onClick={()=> setPayment('cod')}>COD Cash on Delivery</label><input type="radio" name='payment-mode' id='cod' className=''/></div>
-          <div className='flex justify-between bg-gray-100 font-medium p-3' ><label htmlFor="online" onClick={()=> setPayment('onlnie')}>pay online</label><input type="radio" name='payment-mode' id='online' checked/></div>
+          <div className='flex justify-between bg-gray-100 font-medium p-3' ><label htmlFor="cod" onClick={()=> setPayment('cod')}>COD Cash on Delivery</label><input type="radio" name='payment-mode' id='cod' className='' checked/></div>
+          <div className='flex justify-between bg-gray-100 font-medium p-3' ><label htmlFor="online" onClick={()=> setPayment('onlnie')}>pay online</label><input type="radio" name='payment-mode' id='online' /></div>
           <div></div>
         </div>
           <h1 className='text-lg'>Price Details {myCartItems.length} items</h1>
@@ -126,7 +128,7 @@ const Cartaddress = () => {
           <hr />
           <h1 className='flex justify-between font-semibold md:text-lg'><p>Order Total</p><span>₹{amount}</span></h1>
           <p className='px-2 text-xs bg-[#f8f8ff]'>Clicking on 'cotinue' will not deducted any money</p>
-          <button onClick={handleOnContinue} className={`py-2 text-lg sm:text-sm md:text-lg text-center rounded-md text-white font-bold w-full ${payment == 'cod' ? 'bg-green-600':'bg-[#b1389d]'}`}>{payment != 'cod' ? 'Continue' :'Place Order'}</button>
+          <Link  data={dataa} to='/payment-success' className={`py-2 text-lg sm:text-sm md:text-lg text-center rounded-md text-white font-bold w-full ${payment == 'cod' ? 'bg-green-600':'bg-[#b1389d]'}`}>{payment != 'cod' ? 'Continue' :'Place Order'}</Link>
           <img src="https://images.meesho.com/images/marketing/1588578650850.webp" alt="" width={300}/>
         </div>
       </div>
