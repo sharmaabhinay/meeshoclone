@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const altasUrl = 'mongodb+srv://abhiisharma76:meeshoclone@cluster0.jzk2fxs.mongodb.net/meeshoclone'
 const localurl = 'mongodb://localhost:27017/Meesho'
 let newUrl = 'mongodb+srv://abhiisharma76:meeshoclone@cluster0.jzk2fxs.mongodb.net/meeshoclone?retryWrites=true&w=majority&appName=Cluster0'
-mongoose.connect(newUrl)
+mongoose.connect(localurl)
     .then(() => console.log('user mongoose connected'))
     .catch((err) => console.log(err));
 

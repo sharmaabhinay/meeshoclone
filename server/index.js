@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors')
 const Product = require('./mongoose');  // Import the mongoose model
 const users = require('./usermongoose')
+const Orders = require('./orders')
 const jwt = require('jsonwebtoken');
 const Stripe = require('stripe');
 const stripe = Stripe('sk_test_51POmUyP9bDkiuBZVxWJjNzHWLOdj6w1qhslzjVzq8fSmxZ807MoJ3nXhbIOF2KRi9GSCIzab7YLYVz3iSM30l1AS00KWGbsFH5');
@@ -121,18 +122,7 @@ app.post('/getuser', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-// app.put('/updateUser',async (req,res)=> {
-//     const {phone} = req.body;
-//      try{
-//         const user = await users.findOneAndUpdate(
-//             { phone: phone },
-//             { $pull: { cartItems: { _id: cartItem } } },
-//             { new: true }
-//         );
-//      }catch(err){
-//         console.log(err)
-//      }
-// })
+
 app.post('/setUser-address',async (req,res)=>{
     const {phone,newaddress,orders} = req.body;
     try{
@@ -240,6 +230,35 @@ app.post('/searchProducts', async (req, res) => {
     }
     // res.send(req.body.name)
 });
+
+app.post('/order-place',async (req,res)=> {
+    console.log(req.body)
+    try{
+        let result = await new Orders(req.body)
+        await result.save()
+        res.send('order placed')
+    }catch(er){
+        console.log(err)
+        res.send('something went wrong')
+    }
+})
+app.post('/get-user-orders',async (req,res)=> {
+    let {user_id} = req.body;
+    try{
+        let result = await Orders.findOne({user_id:user_id})
+        res.send(result)
+    }catch(err){
+        console.log(err)
+    }
+})
+app.get('/get-orders',async (req,res)=>{
+    try{
+        let result = await Orders.find()
+        res.send(result)
+    }catch(err){
+        console.log(err)
+    }
+})
 
 
 
