@@ -9,10 +9,10 @@ const stripePromise = loadStripe('pk_test_51POmUyP9bDkiuBZVGaIooLfiPYApvnjdFmVjc
 
 const Buynow = () => {
   const location = useLocation()
+  const [payment,setPayment] = useState('cod')
   let productData = location.state?.product
   let userDetails = useSelector((state)=> state.userAuth)
   const initialValue = userDetails.address || {};
-  console.log(userDetails)
   const [address,setAddress] = useState({
     name:initialValue.name ? initialValue.name : "",
     city:initialValue.city ? initialValue.city : "",
@@ -20,29 +20,36 @@ const Buynow = () => {
     PIN:initialValue.PIN ? initialValue.PIN : "",
     house:initialValue.house ? initialValue.house : "",
     area:initialValue.area ? initialValue.area : "",
+    phone:userDetails ? userDetails.phone : ''
+    
 
   })
 
   useEffect(() => {
     window.scroll(0,0)
     document.title = "Cart-checkout";
+    console.log(userDetails)
 
   }, []);
+  const setFun = (e)=> {
+    setAddress({...address,[e.target.name]:e.target.value})
+  }
 
   const handleOnBuy = async()=> {
-    try {
-      const res = await axios.post(`${backendUrl}/checkout-payment`,productData);
-      const { sessionId } = res.data;
+    console.log(address)
+      // try {
+      //   const res = await axios.post(`${backendUrl}/checkout-payment`,productData);
+      //   const { sessionId } = res.data;
 
-      const stripe = await stripePromise;
-      const { error } = await stripe.redirectToCheckout({ sessionId });
+      //   const stripe = await stripePromise;
+      //   const { error } = await stripe.redirectToCheckout({ sessionId });
 
-      if (error) {
-          console.error('Error redirecting to checkout:', error);
-      }
-  } catch (err) {
-      console.error('Error during payment process:', err);
-  }
+      //   if (error) {
+      //       console.error('Error redirecting to checkout:', error);
+      //   }
+      //  } catch (error) {
+      //     console.error('Error during payment process:', err);
+      // }
   }
 
   return (
@@ -93,17 +100,17 @@ const Buynow = () => {
           <div className='flex flex-col gap-7'>
             <div className='flex flex-col gap-5 md:text-lg'>
                 <h1 className='font-semibold md:text-2xl text-[#353543]'>Contact Details</h1>
-                <input type="text" name="name" id="" placeholder='Name' className='outline-none border-b-2 w-full text-[#353543] font-semibold'/>
-                <input type="text" name='phone' placeholder='Contact Number'  className='outline-none border-b-2 w-full text-[#353543] font-semibold'/>
+                <input type="text" onChange={setFun} name="name" value={address.name} id="" placeholder='Name' className='outline-none border-b-2 w-full text-[#353543] font-semibold'/>
+                <input type="text" name='phone' onChange={setFun} value={address.phone}  placeholder='Contact Number'  className='outline-none border-b-2 w-full text-[#353543] font-semibold'/>
             </div>
             <div className='flex flex-col gap-5 md:text-lg'>
                 <h1 className='font-semibold sm:text-base md:text-2xl text-[#353543]'>Address</h1>
-                <input type="text" placeholder='House no.' name='houseno'  className='outline-none border-b-2 w-full text-[#353543] font-semibold'/>
-                <input type="text" placeholder='Area/building/Colony' name='houseno'  className='outline-none border-b-2 w-full text-[#353543] font-semibold'/>
-                <input type="text" placeholder='PIN CODE' name='houseno'  className='outline-none border-b-2 w-full text-[#353543] font-semibold'/>
+                <input type="text" onChange={setFun} placeholder='House no.' value={address.house} name='houseno'  className='outline-none border-b-2 w-full text-[#353543] font-semibold'/>
+                <input type="text" onChange={setFun} placeholder='Area/building/Colony' value={address.area} name='houseno'  className='outline-none border-b-2 w-full text-[#353543] font-semibold'/>
+                <input type="text" onChange={setFun} placeholder='PIN CODE' name='PIN' value={address.PIN}  className='outline-none border-b-2 w-full text-[#353543] font-semibold'/>
                 <div className='flex flex-col gap-5'>
-                    <input type="text" placeholder='city' className='outline-none border-b-2 w-full text-[#353543] font-semibold'/>
-                    <input type="text" placeholder='state' className='outline-none border-b-2 w-full text-[#353543] font-semibold'/>
+                    <input type="text" onChange={setFun} placeholder='city' value={address.city} className='outline-none border-b-2 w-full text-[#353543] font-semibold'/>
+                    <input type="text" onChange={setFun} placeholder='state' value={address.state} className='outline-none border-b-2 w-full text-[#353543] font-semibold'/>
                 </div>
             </div>
           </div>
@@ -112,12 +119,16 @@ const Buynow = () => {
          
         </div>
         <div className='border-s-2 text-[#353543] md:p-5 md:px-12 md:fixed md:right-48  flex flex-col gap-5'>
+        <div className='flex flex-col gap-2'>
+          <div className='flex justify-between items-center bg-gray-100 font-medium p-3 cursor-pointer'onClick={()=> setPayment('cod')} ><div>COD  </div> <div className='border-2 border-gray-400 p-[1px] rounded-full'> <div className={`h-3 w-3 border-2 p-1 rounded-full ${payment == 'cod' ? 'bg-blue-700' : 'bg-none'}`}></div></div></div>
+          <div className='flex justify-between items-center bg-gray-100 font-medium p-3 cursor-pointer'onClick={()=> setPayment('online')} ><div>Online Payment</div> <div className='border-2 border-gray-400 p-[1px] rounded-full'> <div className={`h-3 w-3 border-2 p-1 rounded-full ${payment == 'online' ? 'bg-blue-700' : 'bg-none'}`}></div></div></div>
+        </div>
           <h1 className='text-lg'>Price Details 1 items</h1>
           <div className='text-[#616163] flex justify-between'><p className='dashed'>Total Product Price</p><span>+₹{productData.price}</span></div>
           <hr />
           <h1 className='flex justify-between font-semibold sm:text-sm md:text-lg'><p>Order Total</p><span>₹{productData.price}</span></h1>
           <p className='px-2 text-xs bg-[#f8f8ff]'>Clicking on 'cotinue' will not deducted any money</p>
-          <button onClick={handleOnBuy} className='py-2  md:text-lg bg-[#9f2089] text-center rounded-md text-white font-bold w-full'>Continue</button>
+          <button  onClick={handleOnBuy} className={`py-2 text-lg sm:text-sm md:text-lg text-center rounded-md text-white font-bold w-full ${payment == 'cod' ? 'bg-green-600':'bg-[#b1389d]'}`}>{payment != 'cod' ? 'Continue' :'Place Order'}</button>
           <img src="https://images.meesho.com/images/marketing/1588578650850.webp" alt="" width={300}/>
         </div>
       </div>

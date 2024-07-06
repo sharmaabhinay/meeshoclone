@@ -126,7 +126,7 @@ const Navbar = () => {
                                     </div>
                                 </div>
                                 <hr />
-                                <Link className='flex items-center gap-3'>
+                                <Link to='/orders' className='flex items-center gap-3'>
                                     <i className="fa-solid fa-bag-shopping  sm:text-sm md:text-[1rem]"></i><h1 className=' sm:text-sm md:text-lg font-medium'>My Orders</h1>
                                 </Link>
                                 <hr />

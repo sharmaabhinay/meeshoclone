@@ -71,12 +71,13 @@ const Otpvarification = () => {
                         <div className=''>
                             <img src="https://images.meesho.com/images/marketing/1661417516766.webp" alt="" className='rounded-t-lg' />
                         </div>
-                        <form className='sm:p-5 md:p-10 flex gap-3 flex-col'>
+                        <form onSubmit={handleonverify} className='sm:p-5 md:p-10 flex gap-3 flex-col'>
                             <h1 className='md:text-xl font-medium'>Enter OTP send to {phoneForVerification.phone}</h1>
                             <Link to="/signup" className='font-medium md:text-lg text-[#9f2089] md:mb-2'>CHANGE NUMBER</Link>
                             <div className={`text-red-400 ${otpError ? 'block':'hidden'}`}>OTP is invalid</div>
                             <div className={`flex gap-3  md:my-4 ${isVerifying ? 'text-gray-500' : 'text-black'}`}>
                                 <OtpInput
+                                shouldAutoFocus
                                     value={otp}
                                     onChange={setOtp}
                                     numInputs={6}
@@ -88,7 +89,7 @@ const Otpvarification = () => {
                             <div className='text-start'>
                                 <button className='text-[#9f2089] font-bold sm:text-sm md:text-lg'>RESEND OTP</button>
                             </div>
-                            <button onClick={handleonverify} className={`md:text-2xl flex gap-2 justify-center items-center font-medium p-2 mt-2 rounded-lg text-white text-center ${isVerifying ? 'bg-[#be3ea987] cursor-not-allowed' : "bg-[#9f2089] cursor-pointer" } rounded-2 w-full`}>Verify <div className={`h-4 w-4 rounded-full border-4 border-gray-300 border-t-gray-500 animate-spin ${isVerifying ? 'block':'hidden'}`}></div></button>
+                            <button type='submit' className={`md:text-2xl flex gap-2 justify-center items-center font-medium p-2 mt-2 rounded-lg text-white text-center ${isVerifying ? 'bg-[#be3ea987] cursor-not-allowed' : "bg-[#9f2089] cursor-pointer" } rounded-2 w-full`}>Verify <div className={`h-4 w-4 rounded-full border-4 border-gray-300 border-t-gray-500 animate-spin ${isVerifying ? 'block':'hidden'}`}></div></button>
                         </form>
                         <div className='flex flex-col pb-7 items-center h-60 justify-end'>
                             <small>By continuing, you agree to Meesho's</small>

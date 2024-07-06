@@ -1,7 +1,32 @@
-import React, { useState } from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import backendUrl from '../backend'
+import { useSelector } from 'react-redux'
 
 const Orders = () => {
     const [downloadAppVisibility,setDownloadAppVisibility] = useState(false)
+    let userData = useSelector((state)=> state.userAuth)
+    let item={
+        _id:'itemId',
+        name:'mens tshirt',
+        price:465,
+        image1:'url'
+    }
+    let user = {
+        user_id:userData.userId
+    }
+    const getOrders = async ()=> {
+        try{
+            let res= await axios.post(`${backendUrl}/get-user-orders`,user )
+            console.log(res.data)
+        }catch(err){
+            console.log(err)
+        }
+    }
+    useEffect(()=> {
+        getOrders()
+    },[])
   return (
     <>
     <div className='loginPageBackground'>
@@ -41,25 +66,23 @@ const Orders = () => {
             
         </div>
         <hr />
-        <div className='signupbg w-auto pb-20'>
-            <div className='w-[433px] m-auto border-2 mt-32 bg-white signupbg'>
-                <div className=''>
-                    <img src="https://images.meesho.com/images/marketing/1661417516766.webp" alt="" className='rounded-t-lg'/>
-                </div>
-                <div className='p-10 flex gap-3 flex-col'>
-                    <h1 className='text-xl font-medium'>Sign Up</h1>
-                    <span className='text-sm text-[#8b8ba3]'>Country</span>
-                    <div className='flex gap-3 -mt-2'>
-                        <span className='border-b-2'> 🇮🇳 +91 </span><input type="number" placeholder='Phone Number' className='border-b-2 outline-none'/>
-                    </div>
-                    <button className='text-2xl font-medium p-2 mt-2 rounded-lg text-white bg-[#9f2089] rounded-2 w-full'>Continue</button>
-                </div>
-                <div className='flex flex-col pb-7 items-center h-60 justify-end'>
-                    <small>By cotinuing, you agree to Meesho's</small>
-                    <small><a href="#" className='text-[#9f2089] font-medium'>Terms & Conditions </a>and  <a href="#" className='text-[#9f2089] font-medium'>Privacy Policy</a></small>
-                </div>
-            </div>
-        </div>
+        <div className='p-2 mt-36 border-2 text-[#353543] rounded-md flex gap-8' key={item._id}>
+                <div>delivery date 18,8,24</div>
+                <div>delivered</div>
+                  <Link to={`/singleproduct/${item._id}`} className='w-16 h-16'><img src={item.image1} alt="" className=''/></Link>  
+                  <div className='sm:leading-4 md:leading-8 w-full'>
+                    <div className='md:w-[90%] overflow-hidden h-6 font-semibold sm:text-sm md:text-base'><h1>{item.name}</h1></div>
+                    <div className='sm:text-xs md:text-sm'>{item.price}</div>
+                    <p className='md:text-sm'>All issue easy returns</p>
+                    <p className='text-sm'>size:M . Qty:1</p>
+                    {/* <div className='h-px absolute w-[16rem] left-0 bg-black'></div> */}
+                    <p className='font-semibold text-[#616173] sm:text-xs md:text-sm items-center flex justify-between'>
+                      <div>Sold by: SABRR</div>
+                      <div className='font-semibold'>Free Delivery</div>
+                    </p>
+                  </div>
+              </div>
+        
         </div>
     </>
   )

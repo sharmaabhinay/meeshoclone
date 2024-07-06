@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import Signupnav from '../components/Signupnav';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import backendUrl from '../backend'
 
 const Cartaddress = () => {
   const userPhone = useSelector((state)=> state.userAuth)
   const location = useLocation();
+  const navigate = useNavigate()
   let cartData = location.state?.myCartItems
   let result = userPhone;
   const amount = cartData.length && cartData.map((item)=>item.price).reduce((prev,next)=> prev+next);
@@ -28,6 +29,7 @@ const Cartaddress = () => {
   useEffect(() => {
     window.scroll(0,0)
     document.title = "Cart";
+    // console.log(userPhone.userId)
     
 
   }, []);
@@ -36,12 +38,30 @@ const Cartaddress = () => {
     }else{
       setMycartItems(cartData)
     }
-    console.log(myCartItems)
   },[])
 
   const handleOnContinue = async()=>{
+
+    let newOrder = {
+      order_number:4584,
+      products:cartData,
+      order_amount:amount,
+      payment_mod:'cod',
+      user_id:userPhone.userId,
+    }
+    console.log('here is the all imformation', newOrder)
+
     if(payment == 'cod'){
-      alert('order placed by cod')
+      // alert('order placed by cod')
+      try{
+        let result = await axios.post(`${backendUrl}/order-place` , newOrder)
+        console.log(result.data)
+        if(result){
+          navigate('/payment-success')
+        }
+      }catch(err){
+        console.log(err)
+      }
     }else{
       alert('order placed online')
       // let userDetails = {
@@ -61,8 +81,7 @@ const Cartaddress = () => {
     setAddress({...address,[e.target.name]:e.target.value})
 
   }
-  let dataa="hello world"
-  console.log(dataa)
+
 
 
   return (
@@ -94,7 +113,7 @@ const Cartaddress = () => {
     <div className='md:w-[72%] sm:pt-20 md:pt-28 m-auto'>
       {/* <hr /> */}
       <div className='flex sm:p-3 justify-between relative sm:flex-col md:flex-row gap-10'>
-        {/* <div className='md:w-[60%] flex flex-col gap-4'>
+        <div className='md:w-[60%] flex flex-col gap-4'>
           <h1 className='text-lg font-medium'>Add Delivery Address</h1>
           <div className='flex flex-col sm:gap-4 sm:text-sm md:text-lg md:gap-7'>
             <div className='flex flex-col gap-5 text-lg'>
@@ -115,20 +134,19 @@ const Cartaddress = () => {
             </div>
           </div>
          
-        </div> */}
+        </div>
         
         <div className='border-s-2 text-[#353543] p-5 md:px-12 md:fixed right-48  flex flex-col sm:gap-3 md:gap-5'>
         <div className='flex flex-col gap-2'>
-          <div className='flex justify-between bg-gray-100 font-medium p-3' ><label htmlFor="cod" onClick={()=> setPayment('cod')}>COD Cash on Delivery</label><input type="radio" name='payment-mode' id='cod' className='' checked/></div>
-          <div className='flex justify-between bg-gray-100 font-medium p-3' ><label htmlFor="online" onClick={()=> setPayment('onlnie')}>pay online</label><input type="radio" name='payment-mode' id='online' /></div>
-          <div></div>
+          <div className='flex justify-between items-center bg-gray-100 font-medium p-3 cursor-pointer'onClick={()=> setPayment('cod')} ><div>COD  </div> <div className='border-2 border-gray-400 p-[1px] rounded-full'> <div className={`h-3 w-3 border-2 p-1 rounded-full ${payment == 'cod' ? 'bg-blue-700' : 'bg-none'}`}></div></div></div>
+          <div className='flex justify-between items-center bg-gray-100 font-medium p-3 cursor-pointer'onClick={()=> setPayment('online')} ><div>Online Payment</div> <div className='border-2 border-gray-400 p-[1px] rounded-full'> <div className={`h-3 w-3 border-2 p-1 rounded-full ${payment == 'online' ? 'bg-blue-700' : 'bg-none'}`}></div></div></div>
         </div>
           <h1 className='text-lg'>Price Details {myCartItems.length} items</h1>
           <div className='text-[#616163] flex justify-between'><p className='dashed'>Total Product Price</p><span>+₹{amount}</span></div>
           <hr />
           <h1 className='flex justify-between font-semibold md:text-lg'><p>Order Total</p><span>₹{amount}</span></h1>
           <p className='px-2 text-xs bg-[#f8f8ff]'>Clicking on 'cotinue' will not deducted any money</p>
-          <Link  data={dataa} to='/payment-success' className={`py-2 text-lg sm:text-sm md:text-lg text-center rounded-md text-white font-bold w-full ${payment == 'cod' ? 'bg-green-600':'bg-[#b1389d]'}`}>{payment != 'cod' ? 'Continue' :'Place Order'}</Link>
+          <button  onClick={handleOnContinue} className={`py-2 text-lg sm:text-sm md:text-lg text-center rounded-md text-white font-bold w-full ${payment == 'cod' ? 'bg-green-600':'bg-[#b1389d]'}`}>{payment != 'cod' ? 'Continue' :'Place Order'}</button>
           <img src="https://images.meesho.com/images/marketing/1588578650850.webp" alt="" width={300}/>
         </div>
       </div>
